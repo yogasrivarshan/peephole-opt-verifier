@@ -187,3 +187,42 @@ peephole-pass-shrinks ──▶ peephole (admitted) ──────┘
   — not just the test cases
 
 ➔ Source: single self-contained file `peephole.lisp`
+
+---
+
+## Slide 6 — Conclusion and Broader Applications
+
+**Title:** Conclusion
+
+➔ Key Takeaways
+
+◆ A well-chosen state representation (`cons` pair) simplifies proofs
+  — but requires care (`consp` hypothesis)
+◆ Lemma stacking is essential: break large proofs into small,
+  independently provable facts
+◆ Custom induction schemes are the bridge when two recursive
+  functions (optimizer and evaluator) recurse differently
+◆ Fixpoint iteration adds power with minimal proof overhead
+  — correctness of one pass composes transitively
+
+➔ Lessons Learned
+
+◆ ACL2 naming constraints (`optimize`, `state`, `step` are reserved)
+  force deliberate naming early
+◆ Designing the induction function was the hardest step — it must
+  mirror both the optimizer's case splits and the evaluator's state threading
+◆ Testing alone cannot replace proof: 14 tests pass, but the theorem
+  covers infinitely many programs and states
+
+➔ Where ACL2 Can Be Applied Similarly
+
+◆ Compiler pass verification — register allocation, constant folding,
+  dead code elimination
+◆ Hardware microcode optimization — proving instruction rewriting
+  preserves processor semantics
+◆ Network protocol verification — proving packet transformations
+  preserve payload integrity
+◆ Cryptographic implementation correctness — proving optimized
+  arithmetic matches specification
+◆ Safety-critical systems — formally verified flight controllers,
+  medical device firmware, automotive ECUs
